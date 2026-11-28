@@ -48,3 +48,10 @@ character rather than zero, which is the smallest honest encoding.
 - `generateCodes(freqMap)` — `Map<string, string>` from character to bit string.
 - `encode(text, codes)` — bit string of `'0'` and `'1'`.
 - `decode(bits, codes)` — original text. Throws on unknown, duplicate, empty, or incomplete codes.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
